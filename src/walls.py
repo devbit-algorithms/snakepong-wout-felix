@@ -1,3 +1,5 @@
+from canvas import Canvas
+
 class Wall:
     def __init__(self, x, y):
         self.x = x
@@ -6,3 +8,4 @@ class Wall:
         return self.x
     def GetY(self):
         return self.y
+    
