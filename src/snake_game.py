@@ -5,11 +5,13 @@ delay = 0.5
 
 # Set up the screen
 screen = turtle.Screen()
-screen.setup(width=700, height=400)
+screen.setup(width = 1000, height = 600)
+
+# SNAKE PART
 
 # Snake head
 snakehead = turtle.Turtle()
-# snakehead.shape("square")
+snakehead.shape("square")
 snakehead.penup()
 snakehead.goto(0,0)
 snakehead.direction = "stop"
@@ -55,13 +57,22 @@ screen.onkeypress(go_down, "Down")
 screen.onkeypress(go_right, "Right")
 screen.onkeypress(go_left, "Left")
 
+# PONG PART
+
+# Left Paddle
+left_paddle = turtle.Turtle()
+left_paddle.shape("square")
+left_paddle.shapesize(stretch_wid = 6, stretch_len = 2)
+left_paddle.penup()
+left_paddle.goto(-400, 0)
+
 # Main game loop
 while True:
     screen.update()
     move()
 
     # Collision detection with borders
-    if snakehead.xcor()>340 or snakehead.xcor()<-340 or snakehead.ycor()>190 or snakehead.ycor()<-190:
+    if snakehead.xcor() > 490 or snakehead.xcor() < -490 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
         time.sleep(0.5)
         snakehead.goto(0,0)
         snakehead.direction = "stop"
