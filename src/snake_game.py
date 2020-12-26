@@ -130,8 +130,24 @@ while True:
         y = snakehead.ycor()
         segments[0].goto(x,y)
 
-    print(segments)
     move()
+
+    # Check for snakehead collision with the tail segments
+    for segment in segments:
+        if segment.distance(snakehead) < 20:
+            time.sleep(1)
+            snakehead.goto(0,0)
+            snakehead.direction = "stop"
+
+            # Hide the segments
+            for segment in segments:
+                segment.goto(1000, 1000)
+
+            # Clear the segments list
+            segments.clear()
+
+            # Reset the delay
+            delay = 0.5
 
     time.sleep(delay)
 
