@@ -16,6 +16,16 @@ snakehead.penup()
 snakehead.goto(0,0)
 snakehead.direction = "stop"
 
+# Snake food
+food = turtle.Turtle()
+food.shape("circle")
+food.penup()
+food.goto(0,100)
+
+# Snake tail
+segments = []
+
+
 # Functions for example direction
 def go_up():
     if snakehead.direction != "down":
@@ -69,13 +79,46 @@ left_paddle.goto(-400, 0)
 # Main game loop
 while True:
     screen.update()
-    move()
+    
+    
 
     # Collision detection with borders
     if snakehead.xcor() > 490 or snakehead.xcor() < -490 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
         time.sleep(0.5)
         snakehead.goto(0,0)
         snakehead.direction = "stop"
+
+        # Hide the segments
+        for segment in segments:
+            segment.goto(1000, 1000)
+
+        # Clear the segments list
+        segments.clear()
+
+    # Check for collision with food
+    if snakehead.distance(food) < 20:
+        # Add a segment
+        tail_segment = turtle.Turtle()
+        tail_segment.shape("square")
+        tail_segment.color("grey")
+        tail_segment.penup()
+        segments.append(tail_segment)
+
+        delay -= 0.001
+
+    # Move the end segments first in reverse order
+    for index in range(len(segments) - 1, 0, -1):
+        x = segments[index - 1].xcor()
+        y = segments[index - 1].ycor()
+        segments[index].goto(x, y)
+
+    # Move segment 0 to where the snakehead is
+    if len(segments) > 0:
+        x = snakehead.xcor()
+        y = snakehead.ycor()
+        segments[0].goto(x, y)
+
+    move()
 
     time.sleep(delay)
 
