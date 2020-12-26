@@ -1,7 +1,7 @@
 import turtle
 import time
 
-delay = 0.5
+delay = 0.1
 start_tail = 1
 
 # Set up the screen
@@ -185,6 +185,17 @@ while True:
 
             # Reset the start_tail
             start_tail = 1
+
+    # Check for collision of ball with borders
+    # UP WALL
+    if ball.ycor() > 280:
+        ball.sety(280)
+        ball.dy *= -1
+
+    # DOWN WALL
+    if ball.ycor() < -280:
+        ball.sety(-280)
+        ball.dy *= -1
 
     time.sleep(delay)
 
