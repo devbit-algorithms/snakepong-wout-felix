@@ -72,21 +72,16 @@ def add_tail():
     segments.append(tail_segment)
     
 
-# Keyboard bindings
-screen.listen()
-screen.onkeypress(go_up, "Up")
-screen.onkeypress(go_down, "Down")
-screen.onkeypress(go_right, "Right")
-screen.onkeypress(go_left, "Left")
+
 
 # PONG PART
 
 # Left Paddle
-left_paddle = turtle.Turtle()
-left_paddle.shape("square")
-left_paddle.shapesize(stretch_wid = 6, stretch_len = 2)
-left_paddle.penup()
-left_paddle.goto(-400, 0)
+paddle = turtle.Turtle()
+paddle.shape("square")
+paddle.shapesize(stretch_wid = 6, stretch_len = 2)
+paddle.penup()
+paddle.goto(-400, 0)
 
 # Ball of circle shape
 ball = turtle.Turtle()
@@ -97,6 +92,28 @@ ball.penup()
 ball.goto(0, 0)
 ball.dx = 5
 ball.dy = -5
+
+# Functions to move the paddle
+def paddleup():
+    y = paddle.ycor()
+    y += 20
+    paddle.sety(y)
+
+def paddledown():
+    y = paddle.ycor()
+    y -= 20
+    paddle.sety(y)
+
+# Global part
+
+# Keyboard bindings
+screen.listen()
+screen.onkeypress(go_up, "Up")
+screen.onkeypress(go_down, "Down")
+screen.onkeypress(go_right, "Right")
+screen.onkeypress(go_left, "Left")
+screen.onkeypress(paddleup, "z")
+screen.onkeypress(paddledown, "s")
 
 # Main game loop
 while True:
