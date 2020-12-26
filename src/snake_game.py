@@ -16,7 +16,7 @@ snakehead.shape("square")
 snakehead.speed(0)
 snakehead.penup()
 snakehead.goto(0,0)
-snakehead.direction = "stop"
+snakehead.direction = "right"
 
 # Snake food
 food = turtle.Turtle()
@@ -88,8 +88,19 @@ left_paddle.shapesize(stretch_wid = 6, stretch_len = 2)
 left_paddle.penup()
 left_paddle.goto(-400, 0)
 
+# Ball of circle shape
+ball = turtle.Turtle()
+ball.speed(40)
+ball.shape("circle")
+ball.color("red")
+ball.penup()
+ball.goto(0, 0)
+ball.dx = 5
+ball.dy = -5
+
 # Main game loop
 while True:
+
     screen.update()
 
     if start_tail == 1:
@@ -110,6 +121,9 @@ while True:
 
         # Clear the segments list
         segments.clear()
+
+        # Reset the start_tail
+        start_tail = 1
 
     # Check for collision with food
     if snakehead.distance(food) < 20: # need to change this condition for pong
@@ -137,7 +151,7 @@ while True:
         if segment.distance(snakehead) < 20:
             time.sleep(1)
             snakehead.goto(0,0)
-            snakehead.direction = "stop"
+            snakehead.direction = "right"
 
             # Hide the segments
             for segment in segments:
@@ -148,6 +162,9 @@ while True:
 
             # Reset the delay
             delay = 0.5
+
+            # Reset the start_tail
+            start_tail = 1
 
     time.sleep(delay)
 
