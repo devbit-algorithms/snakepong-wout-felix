@@ -120,6 +120,9 @@ while True:
 
     screen.update()
 
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
     if start_tail == 1:
         add_tail()
         add_tail()
