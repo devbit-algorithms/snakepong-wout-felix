@@ -2,6 +2,7 @@ import turtle
 import time
 
 delay = 0.5
+start_tail = 1
 
 # Set up the screen
 screen = turtle.Screen()
@@ -12,6 +13,7 @@ screen.setup(width = 1000, height = 600)
 # Snake head
 snakehead = turtle.Turtle()
 snakehead.shape("square")
+snakehead.speed(0)
 snakehead.penup()
 snakehead.goto(0,0)
 snakehead.direction = "stop"
@@ -19,6 +21,7 @@ snakehead.direction = "stop"
 # Snake food
 food = turtle.Turtle()
 food.shape("circle")
+food.speed(0)
 food.penup()
 food.goto(0,100)
 
@@ -26,7 +29,7 @@ food.goto(0,100)
 segments = []
 
 
-# Functions for example direction
+# Functions for example direction, fruits, ...
 def go_up():
     if snakehead.direction != "down":
         snakehead.direction = "up"
@@ -60,6 +63,15 @@ def move():
         x = snakehead.xcor()
         snakehead.setx(x + 20)
 
+def add_tail():
+    tail_segment = turtle.Turtle()
+    tail_segment.speed(0)
+    tail_segment.shape("square")
+    tail_segment.color("grey")
+    tail_segment.penup()
+    segments.append(tail_segment)
+    
+
 # Keyboard bindings
 screen.listen()
 screen.onkeypress(go_up, "Up")
@@ -79,8 +91,12 @@ left_paddle.goto(-400, 0)
 # Main game loop
 while True:
     screen.update()
-    
-    
+
+    if start_tail == 1:
+        add_tail()
+        add_tail()
+        add_tail()
+        start_tail = 2
 
     # Collision detection with borders
     if snakehead.xcor() > 490 or snakehead.xcor() < -490 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
@@ -96,28 +112,25 @@ while True:
         segments.clear()
 
     # Check for collision with food
-    if snakehead.distance(food) < 20:
+    if snakehead.distance(food) < 20: # need to change this condition for pong
         # Add a segment
-        tail_segment = turtle.Turtle()
-        tail_segment.shape("square")
-        tail_segment.color("grey")
-        tail_segment.penup()
-        segments.append(tail_segment)
+        add_tail()        
 
         delay -= 0.001
 
     # Move the end segments first in reverse order
-    for index in range(len(segments) - 1, 0, -1):
-        x = segments[index - 1].xcor()
-        y = segments[index - 1].ycor()
+    for index in range(len(segments)-1, 0, -1):
+        x = segments[index-1].xcor()
+        y = segments[index-1].ycor()
         segments[index].goto(x, y)
 
-    # Move segment 0 to where the snakehead is
+    # Move segment 0 to where the head is
     if len(segments) > 0:
         x = snakehead.xcor()
         y = snakehead.ycor()
-        segments[0].goto(x, y)
+        segments[0].goto(x,y)
 
+    print(segments)
     move()
 
     time.sleep(delay)
