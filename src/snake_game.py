@@ -1,8 +1,9 @@
 import turtle
 import time
 
-delay = 0.05
+delay = 0.001
 start_tail = 1
+score = 0
 
 # Set up the screen
 screen = turtle.Screen()
@@ -121,10 +122,21 @@ screen.onkeypress(go_left, "Left")
 screen.onkeypress(paddleup, "z")
 screen.onkeypress(paddledown, "s")
 
+# Displays the score 
+sketch = turtle.Turtle() 
+sketch.speed(0) 
+sketch.color("blue") 
+sketch.penup() 
+sketch.hideturtle() 
+sketch.goto(0, 260) 
+  
+
 # Main game loop
 while True:
 
     screen.update()
+    sketch.write("Score : {}".format(score),
+			align="center", font=("Courier", 24, "normal"))
 
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
@@ -150,6 +162,10 @@ while True:
 
         # Reset the start_tail
         start_tail = 1
+
+        # Reset the score
+        score = 0
+        
 
     """ # Check for collision with food
     if snakehead.distance(food) < 20: # need to change this condition for pong
@@ -187,10 +203,13 @@ while True:
             segments.clear()
 
             # Reset the delay
-            delay = 0.5
+            delay = 0.001
 
             # Reset the start_tail
             start_tail = 1
+
+            # Reset the score
+            score = 0
 
     # Check for collision of ball with borders
     # UP WALL
@@ -214,6 +233,9 @@ while True:
         add_tail()
         ball.setx(-360)
         ball.dx *= -1
+        score += 1
+        sketch.clear()
+         
         
     # Collision with paddle
     if (ball.xcor() < -360 and ball.xcor() > - 370 and ((ball.ycor() < paddle.ycor() + 40) and (ball.ycor() > paddle.ycor() - 40))):
