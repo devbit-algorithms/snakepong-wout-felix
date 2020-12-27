@@ -211,7 +211,11 @@ while True:
         ball.setx(-360)
         ball.dx *= -1
 
-    
+    # Collision with ball and paddle
+    for segment in segments:
+        if (segment.distance(ball) < 20):
+            ball.dx *= -1
+            ball.dy *= -1
 
     # time.sleep(delay)
 
