@@ -37,10 +37,10 @@ border.goto(-360, 0)
 # Snake tail
 segments = []
 
-
 # PONG PART
 
-# Left Paddle
+# Paddle
+# You can move the paddle with 'z' and 's'
 paddle = turtle.Turtle()
 paddle.shape("square")
 paddle.speed(0)
@@ -136,15 +136,40 @@ while True:
     sketch.write("Score : {}".format(score),
 			align="center", font=("Courier", 24, "normal"))
 
+    # Ball movement
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
+    # Next code is used to start with a tail of three
     if start_tail == 1:
         add_tail()
         add_tail()
         add_tail()
         start_tail = 2
 
+    """ # Check for collision with food
+    if snakehead.distance(food) < 20: # need to change this condition for pong
+        # Add a segment
+        add_tail()        
+
+        delay -= 0.001 """
+
+    # Move the end segments first in reverse order
+    for index in range(len(segments)-1, 0, -1):
+        x = segments[index-1].xcor()
+        y = segments[index-1].ycor()
+        segments[index].goto(x, y)
+
+    # Move segment 0 to where the head is
+    if len(segments) > 0:
+        x = snakehead.xcor()
+        y = snakehead.ycor()
+        segments[0].goto(x,y)
+
+    move()
+
+    # ALL NEXT CODE ARE COLLISIONS
+    
     # Collision detection with borders
     if snakehead.xcor() > 490 or snakehead.xcor() < -350 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
         time.sleep(0.5)
@@ -166,27 +191,6 @@ while True:
 
         # Reset the ball
         ball.goto(0, 0)
-        
-    """ # Check for collision with food
-    if snakehead.distance(food) < 20: # need to change this condition for pong
-        # Add a segment
-        add_tail()        
-
-        delay -= 0.001 """
-
-    # Move the end segments first in reverse order
-    for index in range(len(segments)-1, 0, -1):
-        x = segments[index-1].xcor()
-        y = segments[index-1].ycor()
-        segments[index].goto(x, y)
-
-    # Move segment 0 to where the head is
-    if len(segments) > 0:
-        x = snakehead.xcor()
-        y = snakehead.ycor()
-        segments[0].goto(x,y)
-
-    move()
 
     # Check for snakehead collision with the tail segments
     for segment in segments:
@@ -237,12 +241,12 @@ while True:
         sketch.clear()
          
         
-    # Collision with paddle
+    # Collision of the ball with the paddle
     if (ball.xcor() < -360 and ball.xcor() > - 370 and ((ball.ycor() < paddle.ycor() + 40) and (ball.ycor() > paddle.ycor() - 40))):
         ball.setx(-360)
         ball.dx *= -1
 
-    # Collision with ball and paddle
+    # Collision with ball and the tail of the snake
     # When you go with your snake through your ball or go sideways the ball goes back in reverse way
     # Sometimes when you go through the ball, this next code is executed twice because it makes two contacts with the snake
     for segment in segments:
