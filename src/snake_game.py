@@ -38,7 +38,29 @@ border.goto(-360, 0)
 segments = []
 
 
-# Functions for example direction, fruits, ...
+# PONG PART
+
+# Left Paddle
+paddle = turtle.Turtle()
+paddle.shape("square")
+paddle.speed(0)
+paddle.shapesize(stretch_wid = 6, stretch_len = 2)
+paddle.penup()
+paddle.goto(-400, 0)
+
+# Ball of circle shape
+ball = turtle.Turtle()
+ball.speed(40)
+ball.shape("circle")
+ball.color("red")
+ball.penup()
+ball.goto(0, 0)
+ball.dx = -5
+ball.dy = -5
+
+# Global part
+
+# All functions:
 def go_up():
     if snakehead.direction != "down":
         snakehead.direction = "up"
@@ -80,27 +102,6 @@ def add_tail():
     tail_segment.penup()
     segments.append(tail_segment)
 
-# PONG PART
-
-# Left Paddle
-paddle = turtle.Turtle()
-paddle.shape("square")
-paddle.speed(0)
-paddle.shapesize(stretch_wid = 6, stretch_len = 2)
-paddle.penup()
-paddle.goto(-400, 0)
-
-# Ball of circle shape
-ball = turtle.Turtle()
-ball.speed(40)
-ball.shape("circle")
-ball.color("red")
-ball.penup()
-ball.goto(0, 0)
-ball.dx = -5
-ball.dy = -5
-
-# Functions to move the paddle
 def paddleup():
     y = paddle.ycor()
     y += 20
@@ -110,8 +111,6 @@ def paddledown():
     y = paddle.ycor()
     y -= 20
     paddle.sety(y)
-
-# Global part
 
 # Keyboard bindings
 screen.listen()
@@ -128,8 +127,7 @@ sketch.speed(0)
 sketch.color("blue") 
 sketch.penup() 
 sketch.hideturtle() 
-sketch.goto(0, 260) 
-  
+sketch.goto(0, 260)
 
 # Main game loop
 while True:
@@ -165,8 +163,10 @@ while True:
 
         # Reset the score
         score = 0
-        
 
+        # Reset the ball
+        ball.goto(0, 0)
+        
     """ # Check for collision with food
     if snakehead.distance(food) < 20: # need to change this condition for pong
         # Add a segment
@@ -202,14 +202,14 @@ while True:
             # Clear the segments list
             segments.clear()
 
-            # Reset the delay
-            delay = 0.001
-
             # Reset the start_tail
             start_tail = 1
 
             # Reset the score
             score = 0
+
+            # Reset the ball
+            ball.goto(0, 0)
 
     # Check for collision of ball with borders
     # UP WALL
