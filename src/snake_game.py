@@ -18,12 +18,20 @@ snakehead.penup()
 snakehead.goto(0,0)
 snakehead.direction = "right"
 
-# Snake food
+""" # Snake food
 food = turtle.Turtle()
 food.shape("circle")
 food.speed(0)
 food.penup()
-food.goto(0,100)
+food.goto(0,100) """
+
+# long border
+border = turtle.Turtle()
+border.shape("square")
+border.speed(0)
+border.shapesize(stretch_wid = 40, stretch_len = 0.5)
+border.penup()
+border.goto(-360, 0)
 
 # Snake tail
 segments = []
@@ -128,7 +136,7 @@ while True:
         start_tail = 2
 
     # Collision detection with borders
-    if snakehead.xcor() > 490 or snakehead.xcor() < -490 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
+    if snakehead.xcor() > 490 or snakehead.xcor() < -350 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
         time.sleep(0.5)
         snakehead.goto(0,0)
         snakehead.direction = "stop"
@@ -143,12 +151,12 @@ while True:
         # Reset the start_tail
         start_tail = 1
 
-    # Check for collision with food
+    """ # Check for collision with food
     if snakehead.distance(food) < 20: # need to change this condition for pong
         # Add a segment
         add_tail()        
 
-        delay -= 0.001
+        delay -= 0.001 """
 
     # Move the end segments first in reverse order
     for index in range(len(segments)-1, 0, -1):
@@ -201,22 +209,25 @@ while True:
         ball.dx *= -1
 
     # LEFT WALL
+    # When the ball hits the left wall, the snake expands one element on the tail
     if ball.xcor() < -480:
+        add_tail()
         ball.setx(-360)
         ball.dx *= -1
         
-
     # Collision with paddle
     if (ball.xcor() < -360 and ball.xcor() > - 370 and ((ball.ycor() < paddle.ycor() + 40) and (ball.ycor() > paddle.ycor() - 40))):
         ball.setx(-360)
         ball.dx *= -1
 
     # Collision with ball and paddle
+    # When you go with your snake through your ball or go sideways the ball goes back in reverse way
+    # Sometimes when you go through the ball, this next code is executed twice because it makes two contacts with the snake
     for segment in segments:
         if (segment.distance(ball) < 20):
             ball.dx *= -1
             ball.dy *= -1
 
-    # time.sleep(delay)
+    time.sleep(delay)
 
 screen.mainloop()
