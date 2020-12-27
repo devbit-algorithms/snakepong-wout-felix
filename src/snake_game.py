@@ -200,11 +200,19 @@ while True:
         ball.setx(480)
         ball.dx *= -1
 
+    # LEFT WALL
+    if ball.xcor() < -480:
+        ball.setx(-360)
+        ball.dx *= -1
+        
+
     # Collision with paddle
-    if (ball.xcor() < -360 and ball.xcor() > - 370 and (ball.ycor() < paddle.ycor() + 40 and ball.ycor() > paddle.ycor() - 40)):
+    if (ball.xcor() < -360 and ball.xcor() > - 370 and ((ball.ycor() < paddle.ycor() + 40) and (ball.ycor() > paddle.ycor() - 40))):
         ball.setx(-360)
         ball.dx *= -1
 
-    time.sleep(delay)
+    
+
+    # time.sleep(delay)
 
 screen.mainloop()
