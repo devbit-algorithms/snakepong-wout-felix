@@ -1,7 +1,7 @@
 import turtle
 import time
 
-delay = 0.1
+delay = 0.05
 start_tail = 1
 
 # Set up the screen
@@ -13,7 +13,7 @@ screen.setup(width = 1000, height = 600)
 # Snake head
 snakehead = turtle.Turtle()
 snakehead.shape("square")
-snakehead.speed(0)
+snakehead.speed(40)
 snakehead.penup()
 snakehead.goto(0,0)
 snakehead.direction = "right"
@@ -70,15 +70,13 @@ def add_tail():
     tail_segment.color("grey")
     tail_segment.penup()
     segments.append(tail_segment)
-    
-
-
 
 # PONG PART
 
 # Left Paddle
 paddle = turtle.Turtle()
 paddle.shape("square")
+paddle.speed(0)
 paddle.shapesize(stretch_wid = 6, stretch_len = 2)
 paddle.penup()
 paddle.goto(-400, 0)
@@ -90,7 +88,7 @@ ball.shape("circle")
 ball.color("red")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 5
+ball.dx = -5
 ball.dy = -5
 
 # Functions to move the paddle
@@ -196,6 +194,16 @@ while True:
     if ball.ycor() < -280:
         ball.sety(-280)
         ball.dy *= -1
+
+    # RIGTH WALL
+    if ball.xcor() > 480:
+        ball.setx(480)
+        ball.dx *= -1
+
+    # Collision with paddle
+    if (ball.xcor() < -360 and ball.xcor() > - 370 and (ball.ycor() < paddle.ycor() + 40 and ball.ycor() > paddle.ycor() - 40)):
+        ball.setx(-360)
+        ball.dx *= -1
 
     time.sleep(delay)
 
