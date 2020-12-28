@@ -1,11 +1,13 @@
 import turtle
 import time
 from Keyboard_bindings import Bindings
-from setupSnake import Snake
-from setupPaddle import Paddle
-from setupBorder import Border
-from setupBall import Ball
+from Snake import Snake
+from Paddle import Paddle
+from Border import Border
+from Ball import Ball
 from move import Move
+from Tail import Tail
+from sketch import Sketch
 
 delay = 0.001
 start_tail = 1
@@ -47,39 +49,29 @@ bindings.Keyboard_bindings()
 move = Move()
 move.move(snakehead)
 
-def add_tail():
-    tail_segment = turtle.Turtle()
-    tail_segment.speed(0)
-    tail_segment.shape("square")
-    tail_segment.color("grey")
-    tail_segment.penup()
-    segments.append(tail_segment)
-
+tail = Tail()
+semgents = tail.add_tail(segments)
 
 # Displays the score 
-sketch = turtle.Turtle() 
-sketch.speed(0) 
-sketch.color("blue") 
-sketch.penup() 
-sketch.hideturtle() 
-sketch.goto(0, 260)
+
+sk = Sketch()
+sketch = sk.Setup()
 
 # Main game loop
 while True:
 
     screen.update()
-    sketch.write("Score : {}".format(score),
-			align="center", font=("Courier", 24, "normal"))
-
+    #updates the scoreboard
+    sk.write(score)
     # Ball movement
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
     # Next code is used to start with a tail of three
     if start_tail == 1:
-        add_tail()
-        add_tail()
-        add_tail()
+        tail.add_tail(segments)
+        tail.add_tail(segments)
+        tail.add_tail(segments)
         start_tail = 2
 
     # Move the end segments first in reverse order
@@ -162,11 +154,11 @@ while True:
     # LEFT WALL
     # When the ball hits the left wall, the snake expands one element on the tail
     if ball.xcor() < -480:
-        add_tail()
+        tail.add_tail(segments)
         ball.setx(-360)
         ball.dx *= -1
         score += 1
-        sketch.clear()
+        sk.clear()
          
         
     # Collision of the ball with the paddle
