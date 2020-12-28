@@ -36,8 +36,8 @@ pad = Paddle()
 paddle = pad.paddle()
 
 # Ball of circle shape
-ClassBall = Ball()
-ball = ClassBall.setupBall()
+Ball = Ball()
+ball = Ball.setupBall()
 
 # Global part
 
@@ -64,9 +64,8 @@ while True:
     #updates the scoreboard
     sk.write(score)
     # Ball movement
-    ball.setx(ball.xcor() + ball.dx)
-    ball.sety(ball.ycor() + ball.dy)
-
+    
+    Ball.movementBall()
     
 
     # sets the start tail to three
@@ -110,7 +109,8 @@ while True:
         score = 0
 
         # Reset the ball
-        ball.goto(0, 0)
+        # ball.goto(0, 0)
+        Ball.resetBall()
 
     # Check for snakehead collision with the tail segments
     for segment in segments:
@@ -132,32 +132,20 @@ while True:
             score = 0
 
             # Reset the ball
-            ball.goto(0, 0)
+            Ball.resetBall()
 
     # Check for collision of ball with borders
     # UP WALL
-    if ball.ycor() > 280:
-        ball.sety(280)
-        ball.dy *= -1
-
-    # DOWN WALL
-    if ball.ycor() < -280:
-        ball.sety(-280)
-        ball.dy *= -1
-
-    # RIGTH WALL
-    if ball.xcor() > 480:
-        ball.setx(480)
-        ball.dx *= -1
-
+    #returns true if it colides with the left wall
     # LEFT WALL
     # When the ball hits the left wall, the snake expands one element on the tail
-    if ball.xcor() < -480:
+    if Ball.ckeckcollisionBall():
         tail.add_tail(segments)
-        ball.setx(-360)
-        ball.dx *= -1
         score += 1
         sk.clear()
+
+    
+    
          
         
     # Collision of the ball with the paddle
