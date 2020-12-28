@@ -3,6 +3,7 @@ import time
 from Keyboard_bindings import Bindings
 from setupSnake import Snake
 from setupPaddle import Paddle
+from setupBorder import Border
 
 delay = 0.001
 start_tail = 1
@@ -18,24 +19,12 @@ screen.setup(width = 1000, height = 600)
 snake = Snake()
 snakehead = snake.snakehead()
 
-""" # Snake food
-food = turtle.Turtle()
-food.shape("circle")
-food.speed(0)
-food.penup()
-food.goto(0,100) """
-
 # long border
-border = turtle.Turtle()
-border.shape("square")
-border.speed(0)
-border.shapesize(stretch_wid = 40, stretch_len = 0.5)
-border.penup()
-border.goto(-360, 0)
+bor = Border()
+border = bor.setUpBorder()
 
 # Snake tail
 segments = []
-
 
 # Paddle
 # You can move the paddle with 'z' and 's'
