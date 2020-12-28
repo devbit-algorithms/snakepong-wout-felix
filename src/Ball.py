@@ -36,3 +36,7 @@ class Ball:
     def movementBall(self):
         self.ball.setx(self.ball.xcor() + self.ball.dx)
         self.ball.sety(self.ball.ycor() + self.ball.dy)
+    def checkCollitionWithPeddal(self,paddle):
+        if (self.ball.xcor() < -360 and self.ball.xcor() > - 370 and ((self.ball.ycor() < paddle.ycor() + 40) and (self.ball.ycor() > paddle.ycor() - 40))):
+            self.ball.setx(-360)
+            self.ball.dx *= -1

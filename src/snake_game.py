@@ -15,7 +15,7 @@ score = 0
 
 # Set up the screen
 screen = turtle.Screen()
-screen.setup(width = 1000, height = 600)
+screen.setup(width=1000, height=600)
 
 # SNAKE PART
 
@@ -42,7 +42,7 @@ ball = Ball.setupBall()
 # Global part
 
 #Sets key bindings to the right thing.
-bindings = Bindings(screen,snakehead,paddle)
+bindings = Bindings(screen, snakehead, paddle)
 bindings.Keyboard_bindings()
 
 #movement of the snakehead
@@ -52,7 +52,7 @@ move.move(snakehead)
 tail = Tail()
 semgents = tail.add_tail(segments)
 
-# Displays the score 
+# Displays the score
 
 sk = Sketch()
 sketch = sk.Setup()
@@ -64,14 +64,12 @@ while True:
     #updates the scoreboard
     sk.write(score)
     # Ball movement
-    
+
     Ball.movementBall()
-    
 
     # sets the start tail to three
-    
-    tail.start_tail(segments)
 
+    tail.start_tail(segments)
 
     # Move the end segments first in reverse order
     for index in range(len(segments)-1, 0, -1):
@@ -83,16 +81,16 @@ while True:
     if len(segments) > 0:
         x = snakehead.xcor()
         y = snakehead.ycor()
-        segments[0].goto(x,y)
+        segments[0].goto(x, y)
 
     move.move(snakehead)
 
     # ALL NEXT CODE ARE COLLISIONS
-    
+
     # Collision detection with borders
     if snakehead.xcor() > 490 or snakehead.xcor() < -350 or snakehead.ycor() > 290 or snakehead.ycor() < -290:
         time.sleep(0.5)
-        snakehead.goto(0,0)
+        snakehead.goto(0, 0)
         snakehead.direction = "stop"
 
         # Hide the segments
@@ -116,7 +114,7 @@ while True:
     for segment in segments:
         if segment.distance(snakehead) < 20:
             time.sleep(1)
-            snakehead.goto(0,0)
+            snakehead.goto(0, 0)
             snakehead.direction = "right"
 
             # Hide the segments
@@ -144,14 +142,8 @@ while True:
         score += 1
         sk.clear()
 
-    
-    
-         
-        
     # Collision of the ball with the paddle
-    if (ball.xcor() < -360 and ball.xcor() > - 370 and ((ball.ycor() < paddle.ycor() + 40) and (ball.ycor() > paddle.ycor() - 40))):
-        ball.setx(-360)
-        ball.dx *= -1
+    Ball.checkCollitionWithPeddal(paddle)
 
     # Collision with ball and the tail of the snake
     # When you go with your snake through your ball or go sideways the ball goes back in reverse way
