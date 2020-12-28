@@ -37,7 +37,7 @@ paddle = pad.paddle()
 
 # Ball of circle shape
 Ball = Ball()
-ball = Ball.setupBall()
+Ball.setupBall()
 
 # Global part
 
@@ -148,10 +148,8 @@ while True:
     # Collision with ball and the tail of the snake
     # When you go with your snake through your ball or go sideways the ball goes back in reverse way
     # Sometimes when you go through the ball, this next code is executed twice because it makes two contacts with the snake
-    for segment in segments:
-        if (segment.distance(ball) < 20):
-            ball.dx *= -1
-            ball.dy *= -1
+
+    Ball.checkCollitionWithTail(segments)
 
     time.sleep(delay)
 

@@ -40,3 +40,8 @@ class Ball:
         if (self.ball.xcor() < -360 and self.ball.xcor() > - 370 and ((self.ball.ycor() < paddle.ycor() + 40) and (self.ball.ycor() > paddle.ycor() - 40))):
             self.ball.setx(-360)
             self.ball.dx *= -1
+    def checkCollitionWithTail(self,segments):
+        for segment in segments:
+            if (segment.distance(self.ball) < 20):
+                self.ball.dx *= -1
+                self.ball.dy *= -1
