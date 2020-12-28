@@ -5,6 +5,7 @@ from setupSnake import Snake
 from setupPaddle import Paddle
 from setupBorder import Border
 from setupBall import Ball
+from move import Move
 
 delay = 0.001
 start_tail = 1
@@ -42,22 +43,9 @@ ball = setupBall.setupBall()
 bindings = Bindings(screen,snakehead,paddle)
 bindings.Keyboard_bindings()
 
-def move():
-    if snakehead.direction == "up":
-        y = snakehead.ycor()
-        snakehead.sety(y + 20)
-
-    if snakehead.direction == "down":
-        y = snakehead.ycor()
-        snakehead.sety(y - 20)
-
-    if snakehead.direction == "left":
-        x = snakehead.xcor()
-        snakehead.setx(x - 20)
-
-    if snakehead.direction == "right":
-        x = snakehead.xcor()
-        snakehead.setx(x + 20)
+#movement of the snakehead
+move = Move()
+move.move(snakehead)
 
 def add_tail():
     tail_segment = turtle.Turtle()
@@ -94,13 +82,6 @@ while True:
         add_tail()
         start_tail = 2
 
-    """ # Check for collision with food
-    if snakehead.distance(food) < 20: # need to change this condition for pong
-        # Add a segment
-        add_tail()        
-
-        delay -= 0.001 """
-
     # Move the end segments first in reverse order
     for index in range(len(segments)-1, 0, -1):
         x = segments[index-1].xcor()
@@ -113,7 +94,7 @@ while True:
         y = snakehead.ycor()
         segments[0].goto(x,y)
 
-    move()
+    move.move(snakehead)
 
     # ALL NEXT CODE ARE COLLISIONS
     

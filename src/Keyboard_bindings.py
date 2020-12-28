@@ -45,3 +45,4 @@ class Bindings:
         y = self.paddle.ycor()
         y -= 20
         self.paddle.sety(y)
+    
