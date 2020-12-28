@@ -2,6 +2,7 @@ import turtle
 import time
 from Keyboard_bindings import Bindings
 from setupSnake import Snake
+from setupPaddle import Paddle
 
 delay = 0.001
 start_tail = 1
@@ -35,16 +36,11 @@ border.goto(-360, 0)
 # Snake tail
 segments = []
 
-# PONG PART
 
 # Paddle
 # You can move the paddle with 'z' and 's'
-paddle = turtle.Turtle()
-paddle.shape("square")
-paddle.speed(0)
-paddle.shapesize(stretch_wid = 6, stretch_len = 2)
-paddle.penup()
-paddle.goto(-400, 0)
+pad = Paddle()
+paddle = pad.paddle()
 
 # Ball of circle shape
 ball = turtle.Turtle()

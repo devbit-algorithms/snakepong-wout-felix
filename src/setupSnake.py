@@ -2,8 +2,6 @@ import turtle
 
 
 class Snake:
-    def __init__(self):
-      hello = 0
 
     def snakehead(self):
         snakehead = turtle.Turtle()
