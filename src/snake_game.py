@@ -69,11 +69,10 @@ while True:
 
     
 
-    # Next code is used to start with a tail of three
-    if start_tail == 1:
-        for i in range(0,3):
-            tail.add_tail(segments)
-        start_tail = 2
+    # sets the start tail to three
+    
+    tail.start_tail(segments)
+
 
     # Move the end segments first in reverse order
     for index in range(len(segments)-1, 0, -1):
@@ -105,7 +104,7 @@ while True:
         segments.clear()
 
         # Reset the start_tail
-        start_tail = 1
+        tail.clear_start_tail_var()
 
         # Reset the score
         score = 0
@@ -128,8 +127,7 @@ while True:
             segments.clear()
 
             # Reset the start_tail
-            start_tail = 1
-
+            tail.clear_start_tail_var()
             # Reset the score
             score = 0
 
