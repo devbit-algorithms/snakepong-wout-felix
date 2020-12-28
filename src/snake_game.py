@@ -4,6 +4,7 @@ from Keyboard_bindings import Bindings
 from setupSnake import Snake
 from setupPaddle import Paddle
 from setupBorder import Border
+from setupBall import Ball
 
 delay = 0.001
 start_tail = 1
@@ -32,14 +33,8 @@ pad = Paddle()
 paddle = pad.paddle()
 
 # Ball of circle shape
-ball = turtle.Turtle()
-ball.speed(40)
-ball.shape("circle")
-ball.color("red")
-ball.penup()
-ball.goto(0, 0)
-ball.dx = -5
-ball.dy = -5
+setupBall = Ball()
+ball = setupBall.setupBall()
 
 # Global part
 
