@@ -1,6 +1,7 @@
 import turtle
 import time
 from Keyboard_bindings import Bindings
+from setupSnake import Snake
 
 delay = 0.001
 start_tail = 1
@@ -13,12 +14,8 @@ screen.setup(width = 1000, height = 600)
 # SNAKE PART
 
 # Snake head
-snakehead = turtle.Turtle()
-snakehead.shape("square")
-snakehead.speed(40)
-snakehead.penup()
-snakehead.goto(0,0)
-snakehead.direction = "right"
+snake = Snake()
+snakehead = snake.snakehead()
 
 """ # Snake food
 food = turtle.Turtle()
