@@ -36,8 +36,8 @@ pad = Paddle()
 paddle = pad.paddle()
 
 # Ball of circle shape
-setupBall = Ball()
-ball = setupBall.setupBall()
+ClassBall = Ball()
+ball = ClassBall.setupBall()
 
 # Global part
 
@@ -67,11 +67,12 @@ while True:
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
+    
+
     # Next code is used to start with a tail of three
     if start_tail == 1:
-        tail.add_tail(segments)
-        tail.add_tail(segments)
-        tail.add_tail(segments)
+        for i in range(0,3):
+            tail.add_tail(segments)
         start_tail = 2
 
     # Move the end segments first in reverse order
