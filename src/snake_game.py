@@ -1,5 +1,6 @@
 import turtle
 import time
+from Keyboard_bindings import Bindings
 
 delay = 0.001
 start_tail = 1
@@ -60,22 +61,9 @@ ball.dy = -5
 
 # Global part
 
-# All functions:
-def go_up():
-    if snakehead.direction != "down":
-        snakehead.direction = "up"
-
-def go_down():
-    if snakehead.direction != "up":
-        snakehead.direction = "down"
-
-def go_left():
-    if snakehead.direction != "right":
-        snakehead.direction = "left"
-
-def go_right():
-    if snakehead.direction != "left":
-        snakehead.direction = "right"
+#Sets key bindings to the right thing.
+bindings = Bindings(screen,snakehead,paddle)
+bindings.Keyboard_bindings()
 
 def move():
     if snakehead.direction == "up":
@@ -102,24 +90,6 @@ def add_tail():
     tail_segment.penup()
     segments.append(tail_segment)
 
-def paddleup():
-    y = paddle.ycor()
-    y += 20
-    paddle.sety(y)
-
-def paddledown():
-    y = paddle.ycor()
-    y -= 20
-    paddle.sety(y)
-
-# Keyboard bindings
-screen.listen()
-screen.onkeypress(go_up, "Up")
-screen.onkeypress(go_down, "Down")
-screen.onkeypress(go_right, "Right")
-screen.onkeypress(go_left, "Left")
-screen.onkeypress(paddleup, "z")
-screen.onkeypress(paddledown, "s")
 
 # Displays the score 
 sketch = turtle.Turtle() 
