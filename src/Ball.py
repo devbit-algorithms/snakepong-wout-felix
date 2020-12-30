@@ -43,8 +43,8 @@ class Ball:
             if (segment.distance(self.ball) < 20):
                 self.ball.dx *= -1
                 self.ball.dy *= -1
-    def getBall(self):
+    def getBall(self):                  #only here for testing
         return self.ball
-    def SetBallDirection(self,x,y):
+    def SetBallDirection(self,x,y):     #only here for testing
         self.ball.setx(x)
         self.ball.sety(y)
