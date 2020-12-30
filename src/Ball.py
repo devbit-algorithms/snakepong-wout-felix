@@ -1,6 +1,5 @@
 import turtle
 
-
 class Ball:
     def __init__(self):
         self.ball = turtle.Turtle()
@@ -44,3 +43,8 @@ class Ball:
             if (segment.distance(self.ball) < 20):
                 self.ball.dx *= -1
                 self.ball.dy *= -1
+    def getBall(self):
+        return self.ball
+    def SetBallDirection(self,x,y):
+        self.ball.setx(x)
+        self.ball.sety(y)
