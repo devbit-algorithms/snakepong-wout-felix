@@ -48,9 +48,26 @@ def test_go_up_keyboard_binding():
     screen.setup(width=1000, height=600)
     pad = Paddle()
     pad.paddle()
-    snake = Snake()
-    snake.snakehead()
+    snakehead = Snake()
+    sk = snakehead.snakehead()
+    snake = Bindings(screen,sk, pad)
+    snake.go_up()
+    assert snake.GetsnakeheadDirection() == "up"
+    snake.go_right()
+    assert snake.GetsnakeheadDirection() == "right"
+    snake.go_down()
+    assert snake.GetsnakeheadDirection() == "down"
+    snake.go_left()
+    assert snake.GetsnakeheadDirection() == "left"
 
-    binding = Bindings(screen,snake, pad)
-    binding.go_up()
-    assert binding.GetsnakeheadDirection() == "up"
+    #snake should not go left if it is going right
+    snake.go_left()
+    snake.go_right()    #should still be going left 
+    assert snake.GetsnakeheadDirection() == "left"
+
+    snake.go_up() 
+    snake.go_down()#snake should still go up
+    assert snake.GetsnakeheadDirection() == "up"
+
+
+
