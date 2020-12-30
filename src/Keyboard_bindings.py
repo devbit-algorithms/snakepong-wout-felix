@@ -45,4 +45,9 @@ class Bindings:
         y = self.paddle.ycor()
         y -= 20
         self.paddle.sety(y)
+
+    def Getpaddle(self):                    #for testing purposes
+        return self.paddle
+    def GetsnakeheadDirection(self):        #for testing purposes
+        return self.snakehead.direction
     
