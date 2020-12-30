@@ -1,4 +1,9 @@
 from Ball import Ball
+from Keyboard_bindings import Bindings
+import turtle
+from Snake import Snake
+from Paddle import Paddle
+
 
 
 def test_ball_Upwall_collitions():
@@ -36,3 +41,16 @@ def test_ball_Left_wall_collitions():
     assert ball.ckeckcollisionBall() == True
     assert ball.getBall().xcor() == -360 #should reset to -360 since it should reset to the right of the paddle
     assert ball.getBall().dx == 5 #
+
+
+def test_go_up_keyboard_binding():
+    screen = turtle.Screen()
+    screen.setup(width=1000, height=600)
+    pad = Paddle()
+    pad.paddle()
+    snake = Snake()
+    snake.snakehead()
+
+    binding = Bindings(screen,snake, pad)
+    binding.go_up()
+    assert binding.GetsnakeheadDirection() == "up"
