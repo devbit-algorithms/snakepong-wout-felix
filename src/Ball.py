@@ -2,7 +2,7 @@ import turtle
 
 
 class Ball:
-    def setupBall(self):
+    def __init__(self):
         self.ball = turtle.Turtle()
         self.ball.speed(40)
         self.ball.shape("circle")
@@ -11,7 +11,6 @@ class Ball:
         self.ball.goto(0, 0)
         self.ball.dx = -5
         self.ball.dy = -5
-        return self.ball
     def resetBall(self):
         self.ball.goto(0, 0)
     def ckeckcollisionBall(self):

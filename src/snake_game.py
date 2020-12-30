@@ -31,7 +31,6 @@ pad = Paddle()
 paddle = pad.paddle()
 # Ball of circle shape
 Ball = Ball()
-Ball.setupBall()
 
 # Global part
 #Sets key bindings to the right thing.
